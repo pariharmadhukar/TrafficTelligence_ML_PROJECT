@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Volume Estimation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Container -->
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8">
+            
+            <!-- Title -->
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-4">Traffic Volume Estimation</h1>
+            <h2 class="text-xl text-center text-gray-600 mb-6">Enter the details below</h2>
+
+            <!-- Form -->
+            <form action="{{ url_for('result') }}" method="post" class="space-y-6">
+
+                <!-- Holiday & Weather -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Holiday:</label>
+                        <select id="holiday" name="holiday" class="w-full p-2 border border-gray-300 rounded-md">
+                            <option value="7">None</option>
+                            <option value="1">Columbus Day</option>
+                            <option value="10">Veterans Day</option>
+                            <option value="9">Thanksgiving Day</option>
+                            <option value="0">Christmas Day</option>
+                            <option value="6">New Year's Day</option>
+                            <option value="11">Washington's Birthday</option>
+                            <option value="5">Memorial Day</option>
+                            <option value="2">Independence Day</option>
+                            <option value="8">State Fair</option>
+                            <option value="3">Labor Day</option>
+                            <option value="4">Martin Luther King Jr. Day</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Weather:</label>
+                        <select id="weather" name="weather" class="w-full p-2 border border-gray-300 rounded-md">
+                            <option value="1">Clouds</option>
+                            <option value="0">Clear</option>
+                            <option value="6">Rain</option>
+                            <option value="2">Drizzle</option>
+                            <option value="5">Mist</option>
+                            <option value="4">Haze</option>
+                            <option value="3">Fog</option>
+                            <option value="10">Thunderstorm</option>
+                            <option value="8">Snow</option>
+                            <option value="9">Squall</option>
+                            <option value="7">Smoke</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Temperature, Rain, and Snow -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Temperature (°C):</label>
+                        <input type="number" min="-20" max="50" name="temp" placeholder="Enter temperature" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Rain (0 or 1):</label>
+                        <input type="number" min="0" max="1" name="rain" placeholder="0 or 1" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Snow (0 or 1):</label>
+                        <input type="number" min="0" max="1" name="snow" placeholder="0 or 1" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                </div>
+
+                <!-- Date & Time Inputs -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Year:</label>
+                        <input type="number" min="2012" max="2025" name="year" placeholder="YYYY" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Month:</label>
+                        <input type="number" min="1" max="12" name="month" placeholder="1-12" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Day:</label>
+                        <input type="number" min="1" max="31" name="day" placeholder="1-31" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Hours:</label>
+                        <input type="number" min="0" max="23" name="hours" placeholder="0-23" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                </div>
+
+                <!-- Time Inputs -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Minutes:</label>
+                        <input type="number" min="0" max="59" name="minutes" placeholder="0-59" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold">Seconds:</label>
+                        <input type="number" min="0" max="59" name="seconds" placeholder="0-59" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-center mt-6">
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition">Predict</button>
+                </div>
+
+            </form>
+
+            <!-- Prediction Result -->
+            <h3 class="mt-6 text-xl text-center text-gray-800 font-bold">{{ prediction_text }}</h3>
+        </div>
+    </div>
+
+</body>
+</html>
